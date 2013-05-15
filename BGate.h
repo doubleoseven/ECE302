@@ -39,7 +39,7 @@ private:
     int time;               //time
     bool data1;
     bool data2;
-    bool data3;
+    bool data3; 
 
 public:
     // Two constructors -- with and without initial values
