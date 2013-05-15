@@ -59,4 +59,4 @@ public:
     {
         return G;
     }
-};
+ };

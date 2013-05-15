@@ -6,8 +6,8 @@ using namespace std;
 template <typename Elem> class Tree{
 public:
      
-    virtual ~Tree() {}
-    virtual void destroyTree() = 0;
+    //virtual ~Tree() {}
+   // virtual void destroyTree() = 0;
     virtual bool insert(string,string,string,string,int) = 0;
     virtual bool insert(BGate<Elem>&) = 0;
     virtual void postorder(BNode<Elem>*) = 0;
@@ -19,18 +19,17 @@ public:
     virtual string slowPath() = 0;
     virtual int slowPathTime() = 0;
   
-    //virtual  void deleteNode(const BGate<Elem>& deleteGate) = 0;
+    virtual  void deleteNode(BGate<Elem>& ) = 0;
 private:
-    virtual void setVar(string var, Elem e, BNode<Elem>* root ) = 0;
-    virtual void setVar2(string var, Elem e, BNode<Elem>* root ) = 0;
+    virtual void setVar(string  , Elem  , BNode<Elem>* ) = 0;
+    virtual void setVar2(string  , Elem  , BNode<Elem>* ) = 0;
     virtual bool getValue() = 0;
     virtual void evaluate(BNode<Elem>*) = 0;
     virtual bool compute(string, Elem  , Elem  ) = 0;
-    virtual void destroy(BNode<Elem>* p) = 0;
+    //virtual void destroy(BNode<Elem>*) = 0;
     virtual string equation(BNode<Elem>*) = 0;
 
-    //virtual void deleteFromTree(BNode<Elem>* &p) = 0;
-
+ 
 };
 
  
@@ -45,7 +44,7 @@ public:
         root = NULL;
     }//end BTree
     
-    void destroy(BNode<Elem>* p)
+    /*void destroy(BNode<Elem>* p)
     {
         if (p != NULL)
         {
@@ -55,10 +54,10 @@ public:
             p = NULL;
         }//end if
     }//end destroy
+    */
+   // void destroyTree() {destroy(root);}
     
-    void destroyTree() {destroy(root);}
-    
-    ~BTree() {destroy(root);}
+   // ~BTree() {destroy(root);}
     string equation() {
         return equation(root);
     }
@@ -178,8 +177,71 @@ public:
     int slowPathTime(){
         return 31;
     }
+    
+   
+    void deleteNode(BGate<Elem>& deleteGate)
+    { 
+        BNode<Elem>* current;
+         if (root == NULL)    //base condition
+        { 
+            return  ;
+        }//end if
+        else
+        {
+            current = root;
+            while(current != NULL)
+            {
+                if (current->getGate().getIn1() == deleteGate.getOut() )
+                {
+                    current->setLeft(NULL);
+                    return  ;
+                }//end if
+                else
+                    current = current->left();
+            }//end while
+            
+            current = root;
+            while(current != NULL)
+            {
+                if (current->getGate().getIn1() == deleteGate.getOut() )
+                {
+                    current->setLeft(NULL);
+                    return  ;
+                }//end if
+                else
+                    current = current->right();
+            }//end while
+            
+            current = root;
+            while(current != NULL)
+            {
+                if (current->getGate().getIn2() == deleteGate.getOut() )
+                {
+                    current->setRight(NULL);
+                    return  ;
+                }//end if
+                else
+                    current = current->right();
+            }//end while
+            
+            current = root;
+            while(current != NULL)
+            {
+                if (current->getGate().getIn2() == deleteGate.getOut() )
+                {
+                    current->setRight(NULL);
+                    return  ;
+                }//end if
+                else
+                    current = current->left();
+            }//end while
+        }//end else
+        return  ;
 
+        ////
+    }//end delete node
 private:
+        
     string equation(BNode<Elem>* root) {
         string eq = "";
          BGate<Elem> gate;

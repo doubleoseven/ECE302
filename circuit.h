@@ -29,9 +29,10 @@ public:
     }
     
     //circuit.removeGate(Gate)
-    void removeGate(BGate<Elem>* Gate)
+    void removeGate(string logic,string input1,string input2,string output,int time)
     {
-        
+        BGate<Elem> Gate(logic, input1, input2, output, time);
+        tree.deleteNode(Gate);
     }
     
     string equation()

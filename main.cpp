@@ -23,12 +23,13 @@ int main(int argc, const char * argv[])
     reg.addGate("AND", "B", "C","X2",2);
     reg.addGate("OR", "A", "B","X1",2); 
 
-    
+    cout << reg.equation() <<endl;
+
     reg.setVar("A", true);
     reg.setVar("B", true);
     reg.setVar("C", true);
     reg.setVar("D", true);
-    
+    reg.removeGate("OR", "A", "B","X1",2);
     cout << "Y =( " <<  reg.evaluate() << " )" <<endl;
     cout << reg.equation() <<endl;
     cout << reg.longPath() <<endl;
