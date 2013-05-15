@@ -19,7 +19,7 @@ int main(int argc, const char * argv[])
      std::cout << reg.insert("AND", "B", "D","X4",3);
      std::cout << reg.insert("OR", "A", "C","X3",2);
      std::cout << reg.insert("AND", "B", "C","X2",2);
-    std::cout << reg.insert("OR", "A", "B","X1",2)<<endl;
+    std::cout << reg.insert("OR", "A", "B","X1",2) << endl;
     reg.setVar("A", false);
     reg.setVar("B", false);
     reg.setVar("C", false);
@@ -30,7 +30,7 @@ int main(int argc, const char * argv[])
     reg.postorder();
      std::cout <<    "---"<<endl;
     reg.inorder();
-    std::cout <<    "---"<<endl;
+    std::cout <<reg.equation()<<endl;
 
     
 return 0;
