@@ -20,10 +20,10 @@ int main(int argc, const char * argv[])
      std::cout << reg.insert("OR", "A", "C","X3",2);
      std::cout << reg.insert("AND", "B", "C","X2",2);
     std::cout << reg.insert("OR", "A", "B","X1",2)<<endl;
-    reg.setVar("A", true);
-    reg.setVar("B", true);
-    reg.setVar("C", true);
-    reg.setVar("D", true);
+    reg.setVar("A", false);
+    reg.setVar("B", false);
+    reg.setVar("C", false);
+    reg.setVar("D", false);
     std::cout <<"Y =( "<<  reg.evaluate()<<" )" <<endl;
     reg.preorder();
     std::cout <<    "---"<<endl;

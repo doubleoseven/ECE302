@@ -235,7 +235,9 @@ private:
         gate = root->getGate();
         output = compute(gate.getType(),gate.getData1(), gate.getData2());
         root->getGate().setData3(output);
-        
+        setVar(root->getGate().getOut(),output );
+
+        // setVar(gate.getType(),gate.getData3()
     }
  ///
     
