@@ -28,6 +28,8 @@ public:
 
     //virtual  void deleteNode(const BGate<Elem>& deleteGate) = 0;
 private:
+    virtual void setVar(string var, Elem e, BNode<Elem>* root ) = 0;
+    virtual void setVar2(string var, Elem e, BNode<Elem>* root ) = 0;
     virtual bool getValue() = 0;
     virtual void evaluate(BNode<Elem>*) = 0;
     virtual bool compute(string, Elem  , Elem  ) = 0;
@@ -172,64 +174,10 @@ public:
     }
          
  
+    //////////////////
     
-    void setVar(string var, Elem e){
-         
-        BNode<Elem>* current;
-        if (root == NULL)    //base condition
-        {
-            return;
-        }
-        else
-        {
-            current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn1() == var  )
-                {
-                    current->getGate().setData1(e);
-                    return ;
-                }
-                else
-                    current = current->left();
-            }
-            
-            current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn1() == var   )
-                {
-                    current->getGate().setData1(e);
-                     return ;
-                }
-                else
-                    current = current->right();
-            }
-            
-            current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn2() == var)
-                {
-                    current->getGate().setData2(e);
-                    return ;
-                }
-                else
-                    current = current->right();
-            }
-            current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn2() == var )
-                {
-                    current->getGate().setData2(e);
-                    return ;
-                }
-                else
-                    current = current->left();
-            }
-        }
-}
+    void setVar(string var, Elem e) {setVar(var, e,root );}
+    //////////////////
     
     bool evaluate()
     {
@@ -246,6 +194,36 @@ public:
         preorder(root->right());
     } */
 private:
+    void setVar2(string var, Elem e, BNode<Elem>* root ){
+        
+        if (root == NULL)    //base condition
+        {
+            return ;
+        }
+        else if (root->getGate().getIn1() == var  )
+        {
+            root->getGate().setData1(e);
+            return ;
+        }
+        else if (root->getGate().getIn2() == var)
+        {
+            root->getGate().setData2(e);
+            return ;
+        }
+        else
+            return ;
+        
+    }
+    
+    void setVar(string var, Elem e, BNode<Elem>* root ) {
+        if (root == NULL) return; // Empty subtree, do nothing
+        // visit(root);
+        // Perform desired action
+        setVar2(var,e,root);
+        setVar(var, e,root->left());
+        setVar(var, e,root->right());
+        
+    }
     bool getValue()
     {
         return root->getGate().getData3();
