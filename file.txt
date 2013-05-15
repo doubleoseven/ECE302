@@ -1,0 +1,10 @@
+start
+OR	A	B	X1	2.0
+AND	B	C	X2	2.0
+OR	A	C	X3	2.0
+AND	B	D	X4	3.0
+NAND    X1	X2	X5	1.0
+NAND	X3	X4	X6	1.0
+NOR	X5	X6	Y	1.5 
+end
+

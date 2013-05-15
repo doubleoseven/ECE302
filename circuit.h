@@ -2,7 +2,8 @@
 #include "BNode.h"
 #include "Logic.h"
 #include "BTree.h"
- #include <iostream>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -10,18 +11,39 @@ template <typename Elem> class circuit{
 protected:
     BTree<Elem> tree;
 public:
-    //function circuit.build(f)
-    //circuit.removeGate(Gate)
     
     circuit(){}//end circuit constructor
-    string equation() {
-        return tree.equation();
-    }
-    bool insert(string logic,string input1,string input2,string output,int time)
+    
+    //function circuit.build(f)
+    void build()
     {
-        tree.insert(logic,input1,input2, output, time);
-        return true;
-    }//end  insert
+        /*
+         string line;
+        ifstream input ( "logic_ex.txt" );
+        for(line; getline( input, line ); )
+        {
+           // ...for each line in input...
+                }
+         */
+        return;
+    }
+    
+    //circuit.removeGate(Gate)
+    void removeGate(BGate<Elem>* Gate)
+    {
+        
+    }
+    
+    string equation()
+    {
+        return tree.equation();
+    }//end equation
+    
+    void addGate(string logic,string input1,string input2,string output,int time)
+    {
+        if (!(tree.insert(logic,input1,input2, output, time)))
+            std::cout<< logic << "failed"<< std::endl;
+    }//end  addGate
     
     void setVar(string var, Elem e)
     {
@@ -34,14 +56,19 @@ public:
 
     }// end evaluate
     
-    string longPath() {
+    string longPath()
+    {
         return "d";
-    }
-    string slowPath() {
+    }//end longPath
+    
+    string slowPath()
+    {
         return "d";
-    }
-    int slowPathTime(){
+    }//end slowPath
+    
+    int slowPathTime()
+    {
         return 31;
-    }
+    }//end slowPathTime
     
 }; // end circuit

@@ -1,20 +1,17 @@
 #include<iostream>
 #include <stdlib.h>
-   using namespace std;
+using namespace std;
 
 // Binary tree node abstract class
 template <typename Elem> class Tree{
 public:
      
     virtual ~Tree() {}
-    virtual bool isEmpty() const= 0;
     virtual void destroyTree() = 0;
     virtual bool insert(string,string,string,string,int) = 0;
     virtual bool insert(BGate<Elem>&) = 0;
-    
     virtual void postorder(BNode<Elem>*) = 0;
     virtual void postorder() = 0;
-    
     virtual Elem evaluate() = 0;
     virtual void setVar(string, Elem) = 0;
     virtual string equation() = 0;
@@ -82,10 +79,6 @@ public:
         postorder(root);
     }//end postorder
     
-    bool isEmpty() const
-    {
-        return (root == NULL);
-    }//end isEmpty
 /*
  functions for processing the data
  */
@@ -202,7 +195,7 @@ private:
         eq.append(gate.getType());
         eq.append(" ");
         eq.append(gate.getIn2());
-        eq.append(" ), ");
+        eq.append(" ). ");
         return eq;
     }
 
