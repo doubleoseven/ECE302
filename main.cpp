@@ -25,26 +25,13 @@ int main(int argc, const char * argv[])
     reg.setVar("C", true);
     reg.setVar("D", true);
     std::cout <<"Y =( "<<  reg.evaluate()<<" )" <<endl;
-
-
-
     reg.preorder();
     std::cout <<    "---"<<endl;
-
     reg.postorder();
      std::cout <<    "---"<<endl;
     reg.inorder();
     std::cout <<    "---"<<endl;
 
-
-     
-    
-    /* reg.setVar('A', true);
-     reg.setVar('B', false);
-     reg.setVar('C', true);
-     reg.setVar('D', false);
-     reg.eval();
-     */
     
 return 0;
 } 

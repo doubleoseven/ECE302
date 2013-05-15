@@ -173,11 +173,8 @@ public:
         return true;
     }
          
- 
-    //////////////////
     
     void setVar(string var, Elem e) {setVar(var, e,root );}
-    //////////////////
     
     bool evaluate()
     {
@@ -229,24 +226,18 @@ private:
         return root->getGate().getData3();
     } // end getValueOf
     
-    void evaluate(BNode<Elem>* p)
-    {
-        BGate<Elem> gate;
+    void evaluate(BNode<Elem>* root) {
         bool output;
-        if (p == NULL) return;
-        if (p->isLeaf())
-        {
-            //get type to choose the proper operator
-            gate = p->getGate();
-            output = compute(gate.getType(),gate.getData1(), gate.getData2());
-            p->getGate().setData3(output);
-        }
-        else
-        {
-            evaluate(p->left());
-            evaluate(p->right()); 
-         } // end if 
-    } // end evaluate
+        BGate<Elem> gate;
+        if (root == NULL) return; // Empty subtree, do nothing
+        evaluate(root->left());
+        evaluate(root->right());
+        gate = root->getGate();
+        output = compute(gate.getType(),gate.getData1(), gate.getData2());
+        root->getGate().setData3(output);
+        
+    }
+ ///
     
          bool compute(string op, bool firstOperand, bool secondOperand)
     {
