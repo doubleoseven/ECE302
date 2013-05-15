@@ -262,6 +262,5 @@ private:
         else
             return NOR(firstOperand,secondOperand);
     } // end compute
-    
  
 }; // end ExpressionTree

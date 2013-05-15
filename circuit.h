@@ -1,26 +1,47 @@
-//
-//  circuit.h
-//  ECE302-finalProject2
-//
-//  Created by Haneen mohammed on 5/15/13.
-//  Copyright (c) 2013 Amal&Haneen. All rights reserved.
-//
-
-#ifndef ECE302_finalProject2_circuit_h
-#define ECE302_finalProject2_circuit_h
 
 #include "BNode.h"
 #include "Logic.h"
 #include "BTree.h"
-#include <stdlib.h>
-#include <iostream>
+ #include <iostream>
 
-//function circuit.build(f)
-//circuit.setVar(var, value)
-//circuit.eval()
-//circuit.addGate(Gate)
-//circuit.removeGate(Gate)
-//circuit.slowPath();
-//circuit.longPath();
+using namespace std;
 
-#endif
+template <typename Elem> class circuit{
+protected:
+    BTree<Elem> tree;
+public:
+    //function circuit.build(f)
+    //circuit.removeGate(Gate)
+    
+    circuit(){}//end circuit constructor
+    string equation() {
+        return tree.equation();
+    }
+    bool insert(string logic,string input1,string input2,string output,int time)
+    {
+        tree.insert(logic,input1,input2, output, time);
+        return true;
+    }//end  insert
+    
+    void setVar(string var, Elem e)
+    {
+        tree.setVar(var, e);
+    }//end setVar
+    
+    bool evaluate()
+    {
+        return  tree.evaluate();
+
+    }// end evaluate
+    
+    string longPath() {
+        return "d";
+    }
+    string slowPath() {
+        return "d";
+    }
+    int slowPathTime(){
+        return 31;
+    }
+    
+}; // end circuit

@@ -3,7 +3,8 @@ using namespace std;
 int main(int argc, const char * argv[])
 {
     
-     BTree<bool> reg;
+     circuit<bool> reg;
+    
     //f = ask the user to write the data
     //build(f)
     //setVar(var, value)
@@ -26,6 +27,10 @@ int main(int argc, const char * argv[])
     reg.setVar("D", false);
     std::cout <<"Y =( "<<  reg.evaluate()<<" )" <<endl;
     std::cout <<reg.equation()<<endl;
+    std::cout <<reg.longPath()<<endl;
+    std::cout <<reg.slowPath()<<endl;
+    std::cout <<reg.slowPathTime()<<endl;
+
 
     
 return 0;
