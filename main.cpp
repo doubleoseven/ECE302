@@ -1,4 +1,4 @@
-#include "assemble.h"
+#include "circuit.h"
 using namespace std;
 int main(int argc, const char * argv[])
 {
@@ -25,11 +25,6 @@ int main(int argc, const char * argv[])
     reg.setVar("C", false);
     reg.setVar("D", false);
     std::cout <<"Y =( "<<  reg.evaluate()<<" )" <<endl;
-    reg.preorder();
-    std::cout <<    "---"<<endl;
-    reg.postorder();
-     std::cout <<    "---"<<endl;
-    reg.inorder();
     std::cout <<reg.equation()<<endl;
 
     
