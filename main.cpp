@@ -3,7 +3,7 @@ using namespace std;
 int main(int argc, const char * argv[])
 {
     
-     circuit<bool> reg;
+     circuit<string> reg;
     
     //f = ask the user to write the data
     //build(f)
@@ -11,32 +11,32 @@ int main(int argc, const char * argv[])
     //eval()
     //addGate(Gate)
     //removeGate(Gate)
-    //slowPath();
     //longPath();
     //slowPathTime();
 
-    reg.addGate("NOR", "X5", "X6","Y",1.5);
-    reg.addGate("NAND", "X3", "X4","X6",1);
-    reg.addGate("NAND", "X1", "X2","X5",1);
-    reg.addGate("AND", "B", "D","X4",3);
-    reg.addGate("OR", "A", "C","X3",2);
+    reg.addGate("NOR", "X5", "X6","Y",7);
+    reg.addGate("NAND", "X3", "X4","X6",6);
+    reg.addGate("NAND", "X1", "X2","X5",5);
+    reg.addGate("AND", "B", "D","X4",4);
+    reg.addGate("OR", "A", "C","X3",3);
     reg.addGate("AND", "B", "C","X2",2);
-    reg.addGate("OR", "A", "B","X1",2); 
+    reg.addGate("OR", "A", "B","X1",1);
 
     cout << reg.equation() <<endl;
 
-    reg.setVar("A", true);
-    reg.setVar("B", true);
-    reg.setVar("C", true);
-    reg.setVar("D", true);
-    reg.removeGate("OR", "A", "B","X1",2);
+    reg.setVar("A", "1101");
+    reg.setVar("B", "1001");
+    reg.setVar("C", "1111");
+    reg.setVar("D", "0111");
     cout << "Y =( " <<  reg.evaluate() << " )" <<endl;
+    reg.slowPath();
+    cout << reg.longPath() <<endl;
+
+    reg.removeGate("AND", "B", "D","X4",4);
     cout << reg.equation() <<endl;
     cout << reg.longPath() <<endl;
-    cout << reg.slowPath() <<endl;
-    cout << reg.slowPathTime() <<endl;
-
-
+    reg.slowPath();
     
+  
 return 0;
 } 

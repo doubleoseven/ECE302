@@ -1,50 +1,53 @@
-#include<iostream>
-#include <stdlib.h>
-using namespace std;
+//*************************************************************
+// Author: Haneen Mohammed& Amal Mukhtar
+//
+// class BTree
+// Binary tree  abstract class
+//*************************************************************
 
-// Binary tree node abstract class
+#include<iostream>
+using namespace std;
+ 
 template <typename Elem> class Tree{
 public:
      
-    //virtual ~Tree() {}
-   // virtual void destroyTree() = 0;
-    virtual bool insert(string,string,string,string,int) = 0;
-    virtual bool insert(BGate<Elem>&) = 0;
-    virtual void postorder(BNode<Elem>*) = 0;
-    virtual void postorder() = 0;
+    virtual ~Tree() {}
+    virtual bool insert(string,string,string,string,double) = 0;
+    virtual bool insert(BGate<Elem>&) = 0; 
     virtual Elem evaluate() = 0;
     virtual void setVar(string, Elem) = 0;
     virtual string equation() = 0;
-    virtual string longPath() = 0;
-    virtual string slowPath() = 0;
-    virtual int slowPathTime() = 0;
-  
+     virtual pair<double, string> slowPath() = 0;
+    virtual pair<double, string> slowPath(BNode<Elem>*) = 0;
+    virtual int height(BNode<Elem>*) = 0;
     virtual  void deleteNode(BGate<Elem>& ) = 0;
 private:
     virtual void setVar(string  , Elem  , BNode<Elem>* ) = 0;
     virtual void setVar2(string  , Elem  , BNode<Elem>* ) = 0;
-    virtual bool getValue() = 0;
+    virtual Elem getValue() const = 0;
     virtual void evaluate(BNode<Elem>*) = 0;
-    virtual bool compute(string, Elem  , Elem  ) = 0;
-    //virtual void destroy(BNode<Elem>*) = 0;
+    virtual Elem compute(string, Elem  , Elem  ) = 0;
+    virtual void destroy(BNode<Elem>*) = 0;
     virtual string equation(BNode<Elem>*) = 0;
-
- 
+    virtual  double max(double,double) = 0;
 };
 
- 
-// Simple binary tree node implementation
+//*************************************************************
+
 template <typename Elem>
 class BTree : public Tree<Elem> {
 protected:
     BNode<Elem> *root;
+    
 public:
+    // post: creates an empty tree
     BTree()
     {
         root = NULL;
     }//end BTree
+    //*************************************************************
     
-    /*void destroy(BNode<Elem>* p)
+    void destroy(BNode<Elem>* p)
     {
         if (p != NULL)
         {
@@ -52,35 +55,25 @@ public:
             destroy(p->right());
             delete p;
             p = NULL;
-        }//end if
+         }//end if
     }//end destroy
-    */
-   // void destroyTree() {destroy(root);}
-    
-   // ~BTree() {destroy(root);}
-    string equation() {
+    //*************************************************************
+ 
+     
+    ~BTree() {destroy(root);}
+    //*************************************************************
+
+    string equation()
+    {
         return equation(root);
     }
 
-    void postorder(BNode<Elem>* root)
-    {
-        if (root == NULL) return; // Empty subtree, do nothing
-        // visit(root);
-        // Perform desired action
-        postorder(root->left());
-        postorder(root->right());
-        cout << root->getGate().getOut() << root->getGate().getData3() <<endl;
-        cout << root->getGate().getIn1() << root->getGate().getData1() <<endl;
-        cout << root->getGate().getIn2() << root->getGate().getData2() <<endl;
-    }//end postorder
-    void postorder()
-    {
-        postorder(root);
-    }//end postorder
+    //*************************************************************
     
-/*
- functions for processing the data
- */
+    //Function to insert Gate in the binary tree.
+    //Postcondition: If no node in the binary search tree has the
+    // same info as insertItem, a node with the info insertItem
+    // is created and inserted in the binary search tree.
     bool insert(BGate<Elem>& addGate)
     {
         BNode<Elem>* current;
@@ -148,38 +141,34 @@ public:
             }//end while
         }//end else
     return false;
-    }//end insert(BGate<Elem>&)
-    
-    bool insert(string logic,string input1,string input2,string output,int time)
+    }//end insert 
+    //*************************************************************
+
+    bool insert(string logic,string input1,string input2,string output,double time)
     {
         BGate<Elem> inGate(logic,input1,input2,output,time);
         insert(inGate);
         return true;
-    }//end  insert(string,string,string,string,int)
-         
+    }//end  insert 
+    //*************************************************************
+    
     void setVar(string var, Elem e)
     {
         setVar(var, e,root );
     }//end setVar
-    
-    bool evaluate()
+    //*************************************************************
+
+    Elem evaluate()
     {
         evaluate(root);
         return getValue();
     }// end evaluate
-    
-    string longPath() {
-        return "d";
-    }
-    string slowPath() {
-        return "d";
-    }
-    int slowPathTime(){
-        return 31;
-    }
-    
-   
-    void deleteNode(BGate<Elem>& deleteGate)
+    //*************************************************************
+
+    //Function to delete Gate from the binary tree.
+    //Postcondition: If a node with the same info as deleteItem
+    // is found, it is deleted from the binary search tree.
+        void deleteNode(BGate<Elem>& deleteGate)
     { 
         BNode<Elem>* current;
          if (root == NULL)    //base condition
@@ -236,16 +225,61 @@ public:
                     current = current->left();
             }//end while
         }//end else
-        return  ;
-
-        ////
+        return;
     }//end delete node
-private:
+    //*************************************************************
+
+    int height(BNode<Elem>* p)
+    {
+        if (p == NULL)
+            return 0;
+        else
+            return 1 + max(height(p->left()), height(p->right()));
+    }
+    //*************************************************************
+
+    int height()
+    {
+        return height(root);
+    }
+    //*************************************************************
+
+    pair<double, string> slowPath(){
+        return slowPath(root);
+    }
+    //*************************************************************
+
+     pair<double, string> slowPath(BNode<Elem>* root)
+    {
+        double t = 0;
+        string path;
+        if (root == NULL)
+            return  make_pair(0,path);
+        else
+        {
+            t += max(slowPath(root->left()).first, slowPath(root->right()).first) ;
+            if (slowPath(root->left()).first > slowPath(root->right()).first)
+                path.append(slowPath(root->left()).second);
+            else
+                path.append(slowPath(root->right()).second);
+        }
+        path.append(root->getGate().getType());
+        path.append(" ");
+
+        t += root->getGate().getTime();
+        return make_pair(t,path);
+    }
+    //*************************************************************
+
+    
+   private:
         
     string equation(BNode<Elem>* root) {
         string eq = "";
          BGate<Elem> gate;
-        if (root == NULL)   return "";; // Empty subtree, do nothing
+        if (root == NULL)   return ""; // Empty subtree, do nothing
+        else
+        {
         eq.append(equation(root->left()));
         eq.append(equation(root->right()));
         gate = root->getGate(); 
@@ -258,8 +292,10 @@ private:
         eq.append(" ");
         eq.append(gate.getIn2());
         eq.append(" ). ");
-        return eq;
+                    return eq;
+        }
     }
+    //*************************************************************
 
     void setVar2(string var, Elem e, BNode<Elem>* root ){
         
@@ -281,21 +317,24 @@ private:
             return ;
         
     }//end setvar2
-    
+    //*************************************************************
+
     void setVar(string var, Elem e, BNode<Elem>* root ) {
         if (root == NULL) return; // Empty subtree, do nothing
         setVar2(var,e,root);
         setVar(var, e,root->left());
         setVar(var, e,root->right());
     }//end setVar
-    
-    bool getValue()
+    //*************************************************************
+
+    Elem getValue()const
     {
         return root->getGate().getData3();
     } // end getValueOf
-    
+    //*************************************************************
+
     void evaluate(BNode<Elem>* root) {
-        bool output;
+        Elem output;
         BGate<Elem> gate;
         if (root == NULL) return; // Empty subtree, do nothing
         evaluate(root->left());
@@ -305,8 +344,9 @@ private:
         root->getGate().setData3(output);
         setVar(root->getGate().getOut(),output );
     }//end evaluate
-    
-    bool compute(string op, bool firstOperand, bool secondOperand)
+    //*************************************************************
+
+    Elem compute(string op, Elem firstOperand, Elem secondOperand)
     {
         if (op == "AND" )
             return AND(firstOperand,secondOperand);
@@ -317,5 +357,15 @@ private:
         else
             return NOR(firstOperand,secondOperand);
     } // end compute
- 
+    //*************************************************************
+
+ double  max(double x, double y)
+    {
+            if (x >= y)
+                return  x;
+            else
+                return  y;
+    }
+    //*************************************************************
+
 }; // end ExpressionTree

@@ -1,3 +1,10 @@
+//*************************************************************
+// Author: Haneen Mohammed& Amal Mukhtar
+//
+// class circuit
+// This class  is the user interface
+//*************************************************************
+
 
 #include "BNode.h"
 #include "Logic.h"
@@ -14,8 +21,8 @@ public:
     
     circuit(){}//end circuit constructor
     
-    //function circuit.build(f)
-    void build()
+    /** Task: Retrieves the right child of the node.
+     * @return the node that is this nodeÕs left (right) child */    void build()
     {
         /*
          string line;
@@ -28,48 +35,60 @@ public:
         return;
     }
     
-    //circuit.removeGate(Gate)
+    
+    /** Task: Retrieves the right child of the node.
+     * @return the node that is this nodeÕs left (right) child */
     void removeGate(string logic,string input1,string input2,string output,int time)
     {
         BGate<Elem> Gate(logic, input1, input2, output, time);
         tree.deleteNode(Gate);
     }
     
-    string equation()
+    /** Task: Retrieves the right child of the node.
+     * @return the node that is this nodeÕs left (right) child */
+    string equation() 
     {
         return tree.equation();
     }//end equation
     
+    /** Task: Retrieves the right child of the node.
+     * @return the node that is this nodeÕs left (right) child */
     void addGate(string logic,string input1,string input2,string output,int time)
     {
         if (!(tree.insert(logic,input1,input2, output, time)))
             std::cout<< logic << "failed"<< std::endl;
     }//end  addGate
     
+    /** Task: Retrieves the right child of the node.
+     * @return the node that is this nodeÕs left (right) child */
     void setVar(string var, Elem e)
     {
         tree.setVar(var, e);
     }//end setVar
     
-    bool evaluate()
+    /** Task: Retrieves the right child of the node.
+     * @return the node that is this nodeÕs left (right) child */
+    Elem evaluate() 
     {
         return  tree.evaluate();
 
     }// end evaluate
     
-    string longPath()
+    /** Task: Retrieves the right child of the node.
+     * @return the node that is this nodeÕs left (right) child */
+    void slowPath()
     {
-        return "d";
+        cout<< "the slowest path is: " <<  tree.slowPath().second<<endl;
+        cout<< "it took: " <<  tree.slowPath().first << " nano seconds"<<endl;
     }//end longPath
-    
-    string slowPath()
+      
+    /** Task: Retrieves the right child of the node.
+     * @return the node that is this nodeÕs left (right) child */
+    int longPath()
     {
-        return "d";
-    }//end slowPath
+        return tree.height();
+    }
     
-    int slowPathTime()
-    {
-        return 31;
-    }//end slowPathTime
     
+     
 }; // end circuit
