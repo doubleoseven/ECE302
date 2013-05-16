@@ -4,7 +4,7 @@ int main(int argc, const char * argv[])
 {
     
      circuit<string> reg;
-    
+    reg.file_reader("/Users/ahmedmohammed/academic/2013-14/ECE302/ECE302_labs/ECE302-finalProject2/ECE302-finalProject2/file.txt");
     //f = ask the user to write the data
     //build(f)
     

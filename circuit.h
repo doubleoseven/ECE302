@@ -21,13 +21,13 @@ BTree<Elem> tree;
 public:
     circuit();
     ~circuit();
-    void file_reader();
-    void stream_reader(istream& stream);
-    void build();
-    void addGate(string logic,string input1,string input2,string output,int time);
-    void removeGate(string logic,string input1,string input2,string output,int time);
+    void file_reader(string);
+    void stream_reader(istream&);
+    void build(istream&);
+    void addGate(string,string,string,string,int);
+    void removeGate(string,string,string,string,int);
     void equation();
-    void setVar(string var, Elem e);
+    void setVar(string,Elem);
     Elem evaluate();
     void slowPath();
     void longPath();
@@ -40,10 +40,11 @@ template <typename Elem>
 circuit<Elem>::~circuit(){ }
 
 template <typename Elem>
-void circuit<Elem>::file_reader()
+void circuit<Elem>::file_reader(string name)
 {
     string line;
-    ifstream myfile ("example.txt");
+    ifstream myfile;
+    myfile.open (name);
     if (myfile.is_open())
     {
         while (myfile.good())
@@ -54,8 +55,9 @@ void circuit<Elem>::file_reader()
     }
     else
     {
-        cout << "Unable to open file";
+        cout << "Unable to open file" <<endl;
     }
+     
 }
 
 template <typename Elem>
@@ -69,15 +71,11 @@ void circuit<Elem>::stream_reader(istream& stream)
 /** Task: 
 * */
 template <typename Elem>
-void circuit<Elem>::build()
+void circuit<Elem>::build(istream& stream)
 {
+        string line;
+        getline (stream,line);
         /*
-         string line;
-        ifstream input ( "logic_ex.txt" );
-        for(line; getline( input, line ); )
-        {
-           // ...for each line in input...
-                }
          */
         return;
 }
