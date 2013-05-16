@@ -20,6 +20,7 @@ protected:
 BTree<Elem> tree;
 public:
     circuit();
+    ~circuit();
     void file_reader();
     void stream_reader(istream& stream);
     void build();
@@ -33,7 +34,11 @@ public:
 };
 
 template <typename Elem> 
-circuit<Elem>::circuit(){} 
+circuit<Elem>::circuit(){}
+
+template <typename Elem>
+circuit<Elem>::~circuit(){ }
+
 template <typename Elem>
 void circuit<Elem>::file_reader()
 {
@@ -52,6 +57,7 @@ void circuit<Elem>::file_reader()
         cout << "Unable to open file";
     }
 }
+
 template <typename Elem>
 void circuit<Elem>::stream_reader(istream& stream)
 {
@@ -59,6 +65,7 @@ void circuit<Elem>::stream_reader(istream& stream)
     getline (stream,line);
     cout << line << endl;
 }
+
 /** Task: 
 * */
 template <typename Elem>
@@ -74,6 +81,7 @@ void circuit<Elem>::build()
          */
         return;
 }
+
 /** Task: 
  * */
 template <typename Elem>
@@ -82,6 +90,7 @@ void circuit<Elem>::removeGate(string logic,string input1,string input2,string o
     BGate<Elem> Gate(logic, input1, input2, output, time);
     tree.deleteNode(Gate);
 }
+
 /** Task: 
 * @return*/
 template <typename Elem>
@@ -89,7 +98,8 @@ void circuit<Elem>::equation()
 {
     cout << "Set of equations are:" <<endl;
     cout << tree.equation() <<endl;
-}//end equation
+}
+
 /** Task: 
  * @return */
 template <typename Elem>
@@ -97,7 +107,7 @@ void circuit<Elem>::addGate(string logic,string input1,string input2,string outp
 {
     if (!(tree.insert(logic,input1,input2, output, time)))
         std::cout<< logic << "Failed"<< std::endl;
-}//end  addGate
+}
 
 /** Task: 
 *  */
@@ -105,16 +115,15 @@ template <typename Elem>
 void circuit<Elem>::setVar(string var, Elem e)
 {
     tree.setVar(var, e);
-}//end setVar
+}
 
 /** Task: 
  * @return  */
-
 template <typename Elem>
 Elem circuit<Elem>::evaluate()
 {
     return  tree.evaluate();
-}// end evaluate
+}
 
 /** Task: 
  **/
@@ -123,7 +132,7 @@ void circuit<Elem>::slowPath()
 {
     cout<< "The slowest path is: " <<  tree.slowPath().second<<endl;
     cout<< "It took: " <<  tree.slowPath().first << " nano seconds"<<endl;
-}//end longPath
+}
 
 /** Task: 
  */

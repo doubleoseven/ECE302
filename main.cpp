@@ -15,7 +15,7 @@ int main(int argc, const char * argv[])
     reg.addGate("OR", "A", "C","X3",3);
     reg.addGate("AND", "B", "C","X2",2);
     reg.addGate("OR", "A", "B","X1",1);
- 
+    
 
     reg.equation();
 
@@ -36,7 +36,7 @@ int main(int argc, const char * argv[])
     reg.removeGate("AND", "B", "D","X4",4);
     reg.removeGate("AND", "B", "C","X2",2);
     reg.removeGate("OR", "A", "B","X1",1);
-     //reg.removeGate("NOR", "E", "D","A",3);
+    reg.removeGate("OR", "A", "C","X3",3);  
 
     reg.equation();
     reg.longPath();

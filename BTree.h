@@ -54,7 +54,7 @@ public:
             destroy(p->right());
             delete p;
             p = NULL;
-         }//end if
+         } 
     }//end destroy
     //*************************************************************
  
