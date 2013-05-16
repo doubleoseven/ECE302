@@ -19,6 +19,7 @@ string AND(string x, string y)
     }
     return z;
 }
+
 string OR(string x, string y)
 {
     unsigned long len = x.length();
@@ -46,6 +47,7 @@ string NAND(string x, string y)
     }
     return z;
 }
+
 string NOR(string x, string y)
 {
     unsigned long len = x.length();
@@ -58,6 +60,7 @@ string NOR(string x, string y)
     }
     return z;
 }
+
 bool AND(bool x, bool y)
 {
         return x && y;

@@ -10,14 +10,13 @@ using namespace std;
  
 template <typename Elem> class Tree{
 public:
-     
     virtual ~Tree() {}
     virtual bool insert(string,string,string,string,double) = 0;
     virtual bool insert(BGate<Elem>&) = 0; 
     virtual Elem evaluate() = 0;
     virtual void setVar(string, Elem) = 0;
     virtual string equation() = 0;
-     virtual pair<double, string> slowPath() = 0;
+    virtual pair<double, string> slowPath() = 0;
     virtual pair<double, string> slowPath(BNode<Elem>*) = 0;
     virtual int height(BNode<Elem>*) = 0;
     virtual  void deleteNode(BGate<Elem>& ) = 0;
@@ -254,10 +253,10 @@ public:
         double t = 0;
         string path;
         if (root == NULL)
-            return  make_pair(0,path);
+            return  make_pair(0,"");
         else
         {
-            t += max(slowPath(root->left()).first, slowPath(root->right()).first) ;
+            t = max(slowPath(root->left()).first, slowPath(root->right()).first) ;
             if (slowPath(root->left()).first > slowPath(root->right()).first)
                 path.append(slowPath(root->left()).second);
             else
@@ -292,6 +291,7 @@ public:
         eq.append(" ");
         eq.append(gate.getIn2());
         eq.append(" ). ");
+        eq.append("\n");
                     return eq;
         }
     }
@@ -359,7 +359,7 @@ public:
     } // end compute
     //*************************************************************
 
- double  max(double x, double y)
+    double  max(double x, double y)
     {
             if (x >= y)
                 return  x;

@@ -16,7 +16,7 @@ private:
     string in1;     //input1
     string in2;     //input2
     string output;  //output
-    double time;       //time
+    double time;    //time
     Elem data1;     //input1(var) = data1 (value)
     Elem data2;     //input2(var) = data2 (value)
     Elem data3;     //output(var) = data3 (value)

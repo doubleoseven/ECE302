@@ -17,7 +17,6 @@ public:
     virtual void setRight(BinNode*) = 0;
     virtual bool isLeaf() = 0;
     virtual BGate<Elem>& getGate() = 0;
-   
 };
 
 
