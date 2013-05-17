@@ -1,11 +1,10 @@
-//*************************************************************
-//  Author: Haneen Mohammed& Amal Mukhtar
-//
-//  Logic.h
-//  Functions for logical operations [AND,OR,NOR,NAND]
-//  post condition: length(x) == length (y)
-//*************************************************************
- 
+/**
+ ECE302 final project
+ Logic.h
+ @author Haneen Mohammed& Amal Mukhtar
+ @brief Functions for logical operations [AND,OR,NOR,NAND]
+ */
+
 string AND(string x, string y)
 {
     unsigned long len = x.length();

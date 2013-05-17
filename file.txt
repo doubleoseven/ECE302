@@ -4,5 +4,4 @@ NAND X1	X2 X5 1.0
 AND	B D X4 3.0
 OR A C X3 2.0
 AND	B C X2 2.0
-OR A B X1 2.0
 end

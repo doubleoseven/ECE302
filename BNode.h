@@ -1,9 +1,9 @@
-//*************************************************************
-// Author: Haneen Mohammed& Amal Mukhtar
-//
-// class BNode
-// This class is the user interface
-//*************************************************************
+/**
+ ECE302 final project
+ BNode.h
+ @author Haneen Mohammed& Amal Mukhtar
+ @brief
+ */
 
 #include "BGate.h"
 
@@ -37,9 +37,7 @@ public:
     {
         G = e; lc = l; rc = r;
     }
-    ~BNode()
-    {
-    }             // Destructor
+    ~BNode(){}             // Destructor
     // Functions to set and return the gate  
     inline BNode* left() const
     {

@@ -1,9 +1,9 @@
-//*************************************************************
-// Author: Haneen Mohammed& Amal Mukhtar
-//
-// class BGate
-// This class  is the user interface
-//*************************************************************
+/**
+ ECE302 final project
+ BGate.h
+ @author Haneen Mohammed& Amal Mukhtar
+ @brief
+ */
 
 #include <iostream>
 using namespace std;
