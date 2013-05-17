@@ -139,8 +139,8 @@ public:
                     current = current->left();
             }//end while
         }//end else
-        
-    return false;  //if insert failed
+        cout << "insert failed" << endl;
+        return false;  //if insert failed
     }//end insert
     
     /**
@@ -246,8 +246,7 @@ public:
      */
     int height(BNode<Elem>* p)
     {
-        if (p == NULL)
-            return 0;
+        if (p == NULL) return 0;
         else
             return 1 + max(height(p->left()), height(p->right()));
     }
@@ -281,8 +280,7 @@ private:
     {
         double t = 0;
         string path;
-        if (root == NULL)
-            return  make_pair(0,"");
+        if (root == NULL) return  make_pair(0,"");
         else
         {
             t = max(slowPath(root->left()).first, slowPath(root->right()).first) ;
@@ -305,7 +303,7 @@ private:
      */
     string equation(BNode<Elem>* root) {
         string eq = "";
-         BGate<Elem> gate;
+        BGate<Elem> gate;
         if (root == NULL)   return ""; // Empty subtree, do nothing
         else
         {
@@ -333,8 +331,7 @@ private:
      */
     void setVar2(string var, Elem e, BNode<Elem>* root ){
         
-        if (root == NULL)    //base condition
-            return;
+        if (root == NULL)  return; // Empty subtree, do nothing
         else if (root->getGate().getIn1() == var  )
         {
             root->getGate().setDataX(e);
@@ -367,7 +364,7 @@ private:
     Elem getValue()const
     {
         return root->getGate().getDataZ();
-    } // end getValueOf
+    }//end getValueOf
  
     void evaluate(BNode<Elem>* root) {
         Elem output;

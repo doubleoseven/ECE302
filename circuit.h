@@ -47,7 +47,6 @@ circuit<Elem>::~circuit(){ }
 template <typename Elem>
 void circuit<Elem>::build(string name)
 {
-    string line;
     ifstream myfile;
     myfile.open (name);
     if (myfile.is_open())

@@ -4,6 +4,14 @@
  @author Haneen Mohammed& Amal Mukhtar
  @brief Functions for logical operations [AND,OR,NOR,NAND]
  */
+string AND(string x, string y);
+string OR(string x, string y);
+string NAND(string x, string y);
+string NOR(string x, string y);
+bool AND(bool,bool);
+bool OR(bool, bool);
+bool NAND(bool, bool);
+bool NOR(bool, bool);
 
 string AND(string x, string y)
 {
