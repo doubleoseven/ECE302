@@ -58,9 +58,8 @@ public:
     ~BTree() {destroy(root);}
 
     /**
-     Function to insert Gate in the binary tree.
-     @param an Object of type BGate.
-     @return true if Object Gate was inserted successfully, false otherwise.
+     Function to find the set of equations the data represent
+     @return string
      */
     string equation()
     {
@@ -164,8 +163,8 @@ public:
     }//end setVar
     
     /**
-     Function to .
-     @return
+     Function to evaluate, and output the final result
+     @return the final output type Elem
      */
     Elem evaluate()
     {
@@ -240,9 +239,9 @@ public:
     }//end delete node
 
     /**
-     Function to
-     @param
-     @return
+     Function to calculate the height of the tree
+     @param pointer to BNode object
+     @return int, the height of the tree
      */
     int height(BNode<Elem>* p)
     {
@@ -250,32 +249,20 @@ public:
         else
             return 1 + max(height(p->left()), height(p->right()));
     }
-    
-    /**
-     Function to
-     @param
-     @return
-     */
     int height()
     {
         return height(root);
     }
     
     /**
-     Function to
-     @param
-     @return
+     Function to find wich path took the longest time to compute
+     @return the path and the time it took
      */
     pair<double, string> slowPath(){
         return slowPath(root);
     }
     
 private:
-    /**
-     Function to
-     @param
-     @return
-     */
     pair<double, string> slowPath(BNode<Elem>* root)
     {
         double t = 0;
@@ -296,11 +283,6 @@ private:
         return make_pair(t,path);
     }
 
-    /**
-     Function to
-     @param
-     @return
-     */
     string equation(BNode<Elem>* root) {
         string eq = "";
         BGate<Elem> gate;
@@ -324,11 +306,6 @@ private:
         }
     }
 
-    /**
-     Function to
-     @param
-     @return
-     */
     void setVar2(string var, Elem e, BNode<Elem>* root ){
         
         if (root == NULL)  return; // Empty subtree, do nothing
@@ -344,11 +321,7 @@ private:
         }//end else if
         else
             return;    }//end setvar2
-    /**
-     Function to
-     @param
-     @return
-     */
+
     void setVar(string var, Elem e, BNode<Elem>* root ) {
         if (root == NULL) return; // Empty subtree, do nothing
         setVar2(var,e,root);
@@ -356,11 +329,6 @@ private:
         setVar(var, e,root->right());
     }//end setVar
  
-    /**
-     Function to
-     @param
-     @return
-     */
     Elem getValue()const
     {
         return root->getGate().getDataZ();
@@ -378,11 +346,6 @@ private:
         setVar(root->getGate().getOut(),output );
     }//end evaluate
  
-    /**
-     Function to  
-     @param  
-     @return  
-     */
     Elem compute(string op, Elem firstOperand, Elem secondOperand)
     {
         if (op == "AND" )
