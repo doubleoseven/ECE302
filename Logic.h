@@ -25,12 +25,7 @@ string AND(string x, string y)
             z.append("0");
     }
     return z;
-}
-
-bool AND(bool x, bool y)
-{
-    return x && y;
-}
+} 
 
 string OR(string x, string y)
 {

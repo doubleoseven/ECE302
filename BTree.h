@@ -178,56 +178,40 @@ public:
      is found, it is deleted from the binary search tree.
      @param an Object of type BGate.
      */
-        void deleteNode(BGate<Elem>& deleteGate)
-    { 
+        void deleteNode(BGate<Elem>& deleteGate){ 
         BNode<Elem>* current;
-         if (root == NULL)    //base condition
-        { 
-            return  ;
-        }//end if
-        else
-        {
+            if (root == NULL) return;
+        else{
             current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn1() == deleteGate.getOut() )
-                {
+            while(current != NULL){
+                if (current->getGate().getIn1() == deleteGate.getOut()){
                     current->setLeft(NULL);
                     return  ;
                 }//end if
                 else
                     current = current->left();
             }//end while
-            
             current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn1() == deleteGate.getOut() )
-                {
+            while(current != NULL){
+                if (current->getGate().getIn1() == deleteGate.getOut()){
                     current->setLeft(NULL);
                     return  ;
                 }//end if
                 else
                     current = current->right();
             }//end while
-            
             current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn2() == deleteGate.getOut() )
-                {
+            while(current != NULL){
+                if (current->getGate().getIn2() == deleteGate.getOut()){
                     current->setRight(NULL);
                     return  ;
                 }//end if
                 else
                     current = current->right();
             }//end while
-            
             current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn2() == deleteGate.getOut() )
-                {
+            while(current != NULL){
+                if (current->getGate().getIn2() == deleteGate.getOut()){
                     current->setRight(NULL);
                     return  ;
                 }//end if

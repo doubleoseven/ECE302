@@ -40,10 +40,6 @@ circuit<Elem>::circuit(){}
 template <typename Elem>
 circuit<Elem>::~circuit(){ }
 
-/**
- @brief The function be called when the application enter background
- @param the file name with the directory sprcified
- */
 template <typename Elem>
 void circuit<Elem>::build(string name)
 {
@@ -61,13 +57,8 @@ void circuit<Elem>::build(string name)
      
 }
 
-/**
- @brief The function be called when the application enter background
- @param the pointer of the application
- */
 template <typename Elem>
-bool circuit<Elem>::stream_reader(istream& stream)
-{
+bool circuit<Elem>::stream_reader(istream& stream){
     string line;
     getline (stream,line);
     string buf; // Have a buffer string
@@ -85,80 +76,44 @@ bool circuit<Elem>::stream_reader(istream& stream)
     return true;
 }
 
-/**
- @brief remove the 
- @param the pointer of the application
- */
 template <typename Elem>
-void circuit<Elem>::removeGate(string logic,string input1,string input2,string output,string time)
-{
+void circuit<Elem>::removeGate(string logic,string input1,string input2,string output,string time){
     double t = atof(time.c_str());
     BGate<Elem> Gate(logic, input1, input2, output, t);
     tree.deleteNode(Gate);
 }
 
-/**
- @brief The function be called when the application enter background
- @param the pointer of the application
- */
 template <typename Elem>
-void circuit<Elem>::equation()
-{
+void circuit<Elem>::equation(){
     cout << "Set of equations are:" <<endl;
     cout << tree.equation() <<endl;
 }
 
-/**
- @brief The function be called when the application enter background
- @param the pointer of the application
- */
 template <typename Elem>
-void circuit<Elem>::addGate(string logic,string input1,string input2,string output,string time)
-{
+void circuit<Elem>::addGate(string logic,string input1,string input2,string output,string time){
     
     double t = atof(time.c_str());
     if (!(tree.insert(logic,input1,input2, output, t)))
         cout<< logic << "Failed"<< std::endl;
 }
 
-/**
- @brief The function be called when the application enter background
- @param the pointer of the application
- */
 template <typename Elem>
-void circuit<Elem>::setVar(string var, Elem e)
-{
+void circuit<Elem>::setVar(string var, Elem e){
     tree.setVar(var, e);
 }
 
-/**
- @brief The function be called when the application enter background
- @param the pointer of the application
- */
 template <typename Elem>
-Elem circuit<Elem>::evaluate()
-{
+Elem circuit<Elem>::evaluate(){
     return  tree.evaluate();
 }
 
-/**
- @brief The function be called when the application enter background
- @param the pointer of the application
- */
 template <typename Elem>
-void circuit<Elem>::slowPath()
-{
+void circuit<Elem>::slowPath(){
     cout<< "The slowest path is: " <<  tree.slowPath().second<<endl;
     cout<< "It took: " <<  tree.slowPath().first << " nano seconds"<<endl;
 }
-
-/**
- @brief The function be called when the application enter background
- @param the pointer of the application
- */
 template <typename Elem>
-void circuit<Elem>::longPath()
-{
+void circuit<Elem>::longPath(){
     cout<< "The longest path has: " << tree.height() << " Gates" << endl;
 }
      

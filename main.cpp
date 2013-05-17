@@ -4,7 +4,7 @@ int main()
 {
     //f = ask the user to write the directory of the file contains the gates
     circuit<string> CKT;
-    CKT.build("/Users/ahmedmohammed/academic/2013-14/ECE302/ECE302_labs/ECE302-finalProject2/ECE302-finalProject2/file.txt");
+    CKT.build("/Users/ahmedmohammed/file.txt");
     CKT.addGate("OR", "A", "B","X1","2");
     CKT.equation();
     CKT.setVar("A", "1101");
