@@ -11,6 +11,10 @@
 #include "BTree.h"
 #include <fstream>
 #include <iostream>
+#include <stdlib.h>     
+#include <vector>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -21,10 +25,9 @@ BTree<Elem> tree;
 public:
     circuit();
     ~circuit();
-    void file_reader(string);
-    void stream_reader(istream&);
-    void build(istream&);
-    void addGate(string,string,string,string,int);
+    void build(string);
+    bool stream_reader(istream&);
+    void addGate(string,string,string,string,string);
     void removeGate(string,string,string,string,int);
     void equation();
     void setVar(string,Elem);
@@ -40,17 +43,14 @@ template <typename Elem>
 circuit<Elem>::~circuit(){ }
 
 template <typename Elem>
-void circuit<Elem>::file_reader(string name)
+void circuit<Elem>::build(string name)
 {
     string line;
     ifstream myfile;
     myfile.open (name);
     if (myfile.is_open())
     {
-        while (myfile.good())
-        {
-            stream_reader(myfile);
-        }
+        while (stream_reader(myfile)){}
         myfile.close();
     }
     else
@@ -61,26 +61,25 @@ void circuit<Elem>::file_reader(string name)
 }
 
 template <typename Elem>
-void circuit<Elem>::stream_reader(istream& stream)
+bool circuit<Elem>::stream_reader(istream& stream)
 {
     string line;
     getline (stream,line);
-    cout << line << endl;
+    string buf; // Have a buffer string
+    stringstream ss(line); // Insert the string into a stream
+    vector<string> tokens; // Create vector to hold our words
+    
+    while (ss >> buf)
+    {
+        tokens.push_back(buf);
+    }
+    if (tokens[0] == "end")
+        return false;
+    else
+        addGate(tokens[0],tokens[1],tokens[2],tokens[3], tokens[4]);
+    return true;
 }
-
-/** Task: 
-* */
-template <typename Elem>
-void circuit<Elem>::build(istream& stream)
-{
-        string line;
-        getline (stream,line);
-        /*
-         */
-        return;
-}
-
-/** Task: 
+/** Task:
  * */
 template <typename Elem>
 void circuit<Elem>::removeGate(string logic,string input1,string input2,string output,int time)
@@ -101,10 +100,12 @@ void circuit<Elem>::equation()
 /** Task: 
  * @return */
 template <typename Elem>
-void circuit<Elem>::addGate(string logic,string input1,string input2,string output,int time)
+void circuit<Elem>::addGate(string logic,string input1,string input2,string output,string time)
 {
-    if (!(tree.insert(logic,input1,input2, output, time)))
-        std::cout<< logic << "Failed"<< std::endl;
+    
+    double t = atof(time.c_str());
+    if (!(tree.insert(logic,input1,input2, output, t)))
+        cout<< logic << "Failed"<< std::endl;
 }
 
 /** Task: 

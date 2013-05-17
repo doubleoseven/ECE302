@@ -2,20 +2,20 @@
 using namespace std;
 int main(int argc, const char * argv[])
 {
-    
-     circuit<string> reg;
-    reg.file_reader("/Users/ahmedmohammed/academic/2013-14/ECE302/ECE302_labs/ECE302-finalProject2/ECE302-finalProject2/file.txt");
-    //f = ask the user to write the data
+    //f = ask the user to write the directory of the file contains the gates
     //build(f)
     
-    reg.addGate("NOR", "X5", "X6","Y",7);
+    circuit<string> reg;
+    reg.build("/Users/ahmedmohammed/academic/2013-14/ECE302/ECE302_labs/ECE302-finalProject2/ECE302-finalProject2/file.txt");
+
+    /*reg.addGate("NOR", "X5", "X6","Y",7);
     reg.addGate("NAND", "X3", "X4","X6",6);
     reg.addGate("NAND", "X1", "X2","X5",5);
     reg.addGate("AND", "B", "D","X4",4);
     reg.addGate("OR", "A", "C","X3",3);
     reg.addGate("AND", "B", "C","X2",2);
     reg.addGate("OR", "A", "B","X1",1);
-    
+    */
 
     reg.equation();
 
