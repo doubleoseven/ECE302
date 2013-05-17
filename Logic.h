@@ -27,6 +27,11 @@ string AND(string x, string y)
     return z;
 }
 
+bool AND(bool x, bool y)
+{
+    return x && y;
+}
+
 string OR(string x, string y)
 {
     unsigned long len = x.length();
@@ -71,9 +76,10 @@ string NOR(string x, string y)
 bool AND(bool x, bool y)
 {
         return x && y;
-    }
-    bool OR(bool x, bool y)
-    {
+}
+
+bool OR(bool x, bool y)
+{
         return x || y;
 }
     
