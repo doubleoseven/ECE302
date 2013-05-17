@@ -17,9 +17,9 @@ private:
     string in2;     //input2
     string output;  //output
     double time;    //time
-    Elem data1;     //input1(var) = data1 (value)
-    Elem data2;     //input2(var) = data2 (value)
-    Elem data3;     //output(var) = data3 (value)
+    Elem x;     //input1(var) = data1 (value)
+    Elem y;     //input2(var) = data2 (value)
+    Elem z;     //output(var) = data3 (value)
 public:
     BGate(string e,string input1,string input2,string o,double t)
     {type =  e; in1 = input1; in2 = input2; output = o;time = t;}
@@ -34,10 +34,10 @@ public:
     void setOut(const string& e) { output = e; }
     double getTime() const { return time; }
     void setTime(const double& e) { time = e; }
-    Elem getData1()const { return data1; }
-    void setData1(const Elem& b) { data1 = b; }
-    Elem getData2()const { return data2; }
-    void setData2(const Elem& b){ data2 = b; }
-    Elem getData3() const{ return data3; }
-    void setData3(const Elem& b){ data3 = b; }
+    Elem getDataX()const { return x; }
+    void setDataX(const Elem& b) { x = b; }
+    Elem getDataY()const { return y; }
+    void setDataY(const Elem& b){ y = b; }
+    Elem getDataZ() const{ return z; }
+    void setDataZ(const Elem& b){ z = b; }
 };

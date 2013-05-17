@@ -337,12 +337,12 @@ private:
             return;
         else if (root->getGate().getIn1() == var  )
         {
-            root->getGate().setData1(e);
+            root->getGate().setDataX(e);
             return;
         }//end else if
         else if (root->getGate().getIn2() == var)
         {
-            root->getGate().setData2(e);
+            root->getGate().setDataY(e);
             return ;
         }//end else if
         else
@@ -366,7 +366,7 @@ private:
      */
     Elem getValue()const
     {
-        return root->getGate().getData3();
+        return root->getGate().getDataZ();
     } // end getValueOf
  
     void evaluate(BNode<Elem>* root) {
@@ -376,8 +376,8 @@ private:
         evaluate(root->left());
         evaluate(root->right());
         gate = root->getGate();
-        output = compute(gate.getType(),gate.getData1(), gate.getData2());
-        root->getGate().setData3(output);
+        output = compute(gate.getType(),gate.getDataX(), gate.getDataY());
+        root->getGate().setDataZ(output);
         setVar(root->getGate().getOut(),output );
     }//end evaluate
  
