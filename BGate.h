@@ -17,9 +17,9 @@ private:
     string in2;     //input2
     string output;  //output
     double time;    //time
-    Elem x;     //input1(var) = data1 (value)
-    Elem y;     //input2(var) = data2 (value)
-    Elem z;     //output(var) = data3 (value)
+    Elem x;     //input1(var) = x (value)
+    Elem y;     //input2(var) = y (value)
+    Elem z;     //output(var) = z (value)
 public:
     BGate(string e,string input1,string input2,string o,double t)
     {type =  e; in1 = input1; in2 = input2; output = o;time = t;}
