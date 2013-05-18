@@ -44,10 +44,8 @@ public:
         root = NULL;
     }//end BTree
     
-    void destroy(BNode<Elem>* p)
-    {
-        if (p != NULL)
-        {
+    void destroy(BNode<Elem>* p){
+        if (p != NULL){
             destroy(p->left());
             destroy(p->right());
             delete p;
@@ -61,8 +59,7 @@ public:
      Function to find the set of equations the data represent
      @return string
      */
-    string equation()
-    {
+    string equation(){
         return equation(root);
     }
 
@@ -71,8 +68,7 @@ public:
      @param an Object of type BGate.
      @return true if Object Gate was inserted successfully, false otherwise.
      */
-    bool insert(BGate<Elem>& addGate)
-    {
+    bool insert(BGate<Elem>& addGate){
         BNode<Elem>* current; //to traverse the tree
         BNode<Elem>* newNode; //to create new node
     
@@ -83,59 +79,38 @@ public:
         newNode->setRight(NULL);
         
         //find the place to insert the new node
-        if (root == NULL)    //base condition
-        {
+        //base condition
+        if (root == NULL){
             root = newNode;
             return true;
         }
-        else
-        {
+        else{
             current = root;
-             while(current != NULL)
-            {
-                if (current->getGate().getIn1() == addGate.getOut() )
-                {
+             while(current != NULL){
+                if (current->getGate().getIn1() == addGate.getOut()){
                     current->setLeft(newNode);
                     return true;
                 }//end if
+                else if (current->getGate().getIn2() == addGate.getOut()){
+                        current->setRight(newNode);
+                        return true;
+                }//end else if
                 else
                     current = current->left();
             }//end while
             
             current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn1() == addGate.getOut() )
-                {
+            while(current != NULL){
+                if (current->getGate().getIn1() == addGate.getOut()){
                     current->setLeft(newNode);
                     return true;
                 }//end if
-                else
-                    current = current->right();
-            }//end while
-            
-            current = root;
-            while(current != NULL)
-            {
-                 if (current->getGate().getIn2() == addGate.getOut() )
-                {
+                else if (current->getGate().getIn2() == addGate.getOut()){
                     current->setRight(newNode);
                     return true;
-                }//end if
+                }//end else if
                 else
                     current = current->right();
-            }//end while
-            
-            current = root;
-            while(current != NULL)
-            {
-                if (current->getGate().getIn2() == addGate.getOut() )
-                {
-                    current->setRight(newNode);
-                    return true;
-                }//end if
-                else
-                    current = current->left();
             }//end while
         }//end else
         cout << "insert failed" << endl;
@@ -147,8 +122,7 @@ public:
      @param 
      @return true if the Gate was initilized& inserted successfully, false otherwise.
      */
-    bool insert(string logic,string input1,string input2,string output,double time)
-    {
+    bool insert(string logic,string input1,string input2,string output,double time){
         BGate<Elem> inGate(logic,input1,input2,output,time);
         return insert(inGate);
     }//end  insert
@@ -166,8 +140,7 @@ public:
      Function to evaluate, and output the final result
      @return the final output type Elem
      */
-    Elem evaluate()
-    {
+    Elem evaluate(){
         evaluate(root);
         return getValue();
     }// end evaluate
@@ -188,6 +161,10 @@ public:
                     current->setLeft(NULL);
                     return  ;
                 }//end if
+                else if (current->getGate().getIn2() == deleteGate.getOut()){
+                    current->setRight(NULL);
+                    return  ;
+                }//end else if
                 else
                     current = current->left();
             }//end while
@@ -195,28 +172,14 @@ public:
             while(current != NULL){
                 if (current->getGate().getIn1() == deleteGate.getOut()){
                     current->setLeft(NULL);
-                    return  ;
+                    return ;
                 }//end if
-                else
-                    current = current->right();
-            }//end while
-            current = root;
-            while(current != NULL){
-                if (current->getGate().getIn2() == deleteGate.getOut()){
+                else if (current->getGate().getIn2() == deleteGate.getOut()){
                     current->setRight(NULL);
                     return  ;
-                }//end if
+                }//end else if
                 else
                     current = current->right();
-            }//end while
-            current = root;
-            while(current != NULL){
-                if (current->getGate().getIn2() == deleteGate.getOut()){
-                    current->setRight(NULL);
-                    return  ;
-                }//end if
-                else
-                    current = current->left();
             }//end while
         }//end else
         return;
@@ -227,8 +190,7 @@ public:
      @param pointer to BNode object
      @return int, the height of the tree
      */
-    int height(BNode<Elem>* p)
-    {
+    int height(BNode<Elem>* p){
         if (p == NULL) return 0;
         else
             return 1 + max(height(p->left()), height(p->right()));
@@ -248,13 +210,11 @@ public:
     
 private:
     // Recursive partners of the public member functions 
-    pair<double, string> slowPath(BNode<Elem>* root)
-    {
+    pair<double, string> slowPath(BNode<Elem>* root){
         double t = 0;
         string path;
         if (root == NULL) return  make_pair(0,"");
-        else
-        {
+        else{
             t = max(slowPath(root->left()).first, slowPath(root->right()).first) ;
             if (slowPath(root->left()).first > slowPath(root->right()).first)
                 path.append(slowPath(root->left()).second);
@@ -268,12 +228,11 @@ private:
         return make_pair(t,path);
     }
 
-    string equation(BNode<Elem>* root) {
+    string equation(BNode<Elem>* root){
         string eq = "";
         BGate<Elem> gate;
         if (root == NULL)   return ""; // Empty subtree, do nothing
-        else
-        {
+        else{
         eq.append(equation(root->left()));
         eq.append(equation(root->right()));
         gate = root->getGate(); 
@@ -287,27 +246,25 @@ private:
         eq.append(gate.getIn2());
         eq.append(" ). ");
         eq.append("\n");
-                    return eq;
+        return eq;
         }
     }
 
-    void setVar2(string var, Elem e, BNode<Elem>* root ){
+    void setVar2(string var, Elem e, BNode<Elem>* root){
         
         if (root == NULL)  return; // Empty subtree, do nothing
-        else if (root->getGate().getIn1() == var  )
-        {
+        else if (root->getGate().getIn1() == var){
             root->getGate().setDataX(e);
             return;
         }//end else if
-        else if (root->getGate().getIn2() == var)
-        {
+        else if (root->getGate().getIn2() == var){
             root->getGate().setDataY(e);
             return ;
         }//end else if
         else
             return;    }//end setvar2
 
-    void setVar(string var, Elem e, BNode<Elem>* root ) {
+    void setVar(string var, Elem e, BNode<Elem>* root){
         if (root == NULL) return; // Empty subtree, do nothing
         setVar2(var,e,root);
         setVar(var, e,root->left());
@@ -319,7 +276,7 @@ private:
         return root->getGate().getDataZ();
     }//end getValueOf
  
-    void evaluate(BNode<Elem>* root) {
+    void evaluate(BNode<Elem>* root){
         Elem output;
         BGate<Elem> gate;
         if (root == NULL) return; // Empty subtree, do nothing
@@ -348,8 +305,7 @@ private:
      @param (double, double)
      @return the larger number
      */
-    double  max(double x, double y)
-    {
+    double  max(double x, double y){
             if (x >= y)
                 return  x;
             else
