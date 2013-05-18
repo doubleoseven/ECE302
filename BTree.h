@@ -247,6 +247,7 @@ public:
     }
     
 private:
+    // Recursive partners of the public member functions 
     pair<double, string> slowPath(BNode<Elem>* root)
     {
         double t = 0;

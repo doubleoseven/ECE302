@@ -40,6 +40,7 @@ circuit<Elem>::circuit(){}
 template <typename Elem>
 circuit<Elem>::~circuit(){ }
 
+//Reads a boolean expression in prefix form from a texttual file and builds the corresponding expression tree.
 template <typename Elem>
 void circuit<Elem>::build(string name)
 {
@@ -82,7 +83,8 @@ void circuit<Elem>::removeGate(string logic,string input1,string input2,string o
     BGate<Elem> Gate(logic, input1, input2, output, t);
     tree.deleteNode(Gate);
 }
-
+/*
+  */
 template <typename Elem>
 void circuit<Elem>::equation(){
     cout << "Set of equations are:" <<endl;
@@ -101,7 +103,7 @@ template <typename Elem>
 void circuit<Elem>::setVar(string var, Elem e){
     tree.setVar(var, e);
 }
-
+//Outputs the corresponding boolean expression 
 template <typename Elem>
 Elem circuit<Elem>::evaluate(){
     return  tree.evaluate();
