@@ -24,8 +24,7 @@ private:
     virtual void setVar2(string  , Elem  , BNode<Elem>* ) = 0;
     virtual Elem getValue() const = 0;
     virtual void evaluate(BNode<Elem>*) = 0;
-    virtual Elem compute(string, Elem  , Elem  ) = 0;
-    virtual void destroy(BNode<Elem>*) = 0;
+     virtual void destroy(BNode<Elem>*) = 0;
     virtual string equation(BNode<Elem>*) = 0;
     virtual  double max(double,double) = 0;
 };
@@ -74,7 +73,7 @@ public:
     
         newNode = new BNode<Elem>;
         //create new node and initileze it with Object BGate
-        newNode->getGate() = addGate;
+        newNode->setGate(addGate);
         newNode->setLeft(NULL);
         newNode->setRight(NULL);
         
@@ -283,23 +282,11 @@ private:
         evaluate(root->left());
         evaluate(root->right());
         gate = root->getGate();
-        output = compute(gate.getType(),gate.getDataX(), gate.getDataY());
+        output = gate.operation();
         root->getGate().setDataZ(output);
         setVar(root->getGate().getOut(),output );
     }//end evaluate
- 
-    Elem compute(string op, Elem firstOperand, Elem secondOperand)
-    {
-        if (op == "AND" )
-            return AND(firstOperand,secondOperand);
-        else if (op == "OR")
-            return OR(firstOperand,secondOperand);
-        else if (op == "NAND")
-            return NAND(firstOperand,secondOperand);
-        else
-            return NOR(firstOperand,secondOperand);
-    }//end compute
- 
+  
     /**
      Function to compare to numbers and return the larger number.
      @param (double, double)

@@ -5,7 +5,6 @@
  @brief This class  is the user interface
  */
 #include "BNode.h"
-#include "Logic.h"
 #include "BTree.h"
 #include <fstream>
 #include <iostream>
