@@ -2,7 +2,9 @@
  ECE302 final project
  BGate.h
  @author Haneen Mohammed& Amal Mukhtar
- @brief
+ @brief The purpose of this class is to create an Object logic gate and set its inputs and outputs,and to define our operations on it. 
+        The operations of logic gate was define in this class such as AND, OR, NAND and NOR. 
+        These logic can be of type Boolean or string. 
  */
 
 #include <iostream>

@@ -2,7 +2,7 @@
  ECE302 final project
  BNode.h
  @author Haneen Mohammed& Amal Mukhtar
- @brief
+ @brief The purpose of this class is to save the information which has been set in BGate in the nodes. 
  */
 
 #include "BGate.h"
@@ -20,7 +20,6 @@ public:
     virtual void setGate(BGate<Elem>&) = 0;
 };
 
-
 // Simple binary tree node implementation
 template <typename Elem>
 class BNode : public BinNode<Elem> {
@@ -30,47 +29,37 @@ private:
     BNode* rc;  // Pointer to right child
 public:
     // Two constructors -- with and without initial values
-    BNode()
-    {
+    BNode(){
         lc = rc = NULL;
     }
-    BNode(BGate<Elem> e, BNode* l =NULL, BNode* r =NULL)
-    {
+    BNode(BGate<Elem> e, BNode* l =NULL, BNode* r =NULL){
         G = e; lc = l; rc = r;
     }
     ~BNode(){}             // Destructor
     // Functions to set and return the gate  
-    inline BNode* left() const
-    {
+    inline BNode* left() const{
         return lc;
     }
-    void setLeft(BinNode<Elem>* b)
-    {
+    void setLeft(BinNode<Elem>* b){
         lc = (BNode*)b;
     }
-    inline BNode* right() const
-    {
+    inline BNode* right() const{
         return rc;
     }
-    void setRight(BinNode<Elem>* b)
-    {
+    void setRight(BinNode<Elem>* b){
         rc = (BNode*)b;
     }
     // Return true if it is a leaf, false otherwise
-    bool isLeaf()
-    {
+    bool isLeaf(){
         return (lc == NULL) && (rc == NULL);
     }
     
     /** Task: Retrieves Gate contained in the node.
      * @return object Gate */
-    BGate<Elem>& getGate()
-    {
+    BGate<Elem>& getGate(){
         return G;
     }
-    void setGate(BGate<Elem>& g)
-    {
+    void setGate(BGate<Elem>& g){
         G = g;
     }
-
   };

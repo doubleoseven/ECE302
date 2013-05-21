@@ -2,7 +2,8 @@
  ECE302 final project
  BTree.h
  @author Haneen Mohammed& Amal Mukhtar
- @brief 
+ @brief The purpose of this class is to link between the nodes that has been created by BNode class, 
+        and to perform some basic operations on the tree.
  */
 
 #include<iostream>
